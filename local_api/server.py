@@ -3,20 +3,23 @@ import asyncio
 import os
 import requests
 from dotenv import load_dotenv
+from langchain_anthropic import ChatAnthropic
 from browser_use import Agent
-from langchain import ChatAnthropic
+from flask_cors import CORS, cross_origin
 
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app) 
 
 @app.route('/run-task', methods=['POST'])
+@cross_origin()
 def run_agent():
     task = request.json.get('task')
     async def main():
         model = ChatAnthropic(model='claude-3-opus-20240229', api_key=os.environ.get("ANTHROPIC_API_KEY"))
         agent = Agent(
-            task="Go to Nike.com, click on 'Women', click on clothing, click on Size and select 'XS', return the number of items available",
+            task=task,
             llm=model,
         )
         result = await agent.run()

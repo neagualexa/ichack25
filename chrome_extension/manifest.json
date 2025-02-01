@@ -5,8 +5,8 @@
     "description": "An AI task manager extension to automate your daily tasks.",
     "permissions": [
       "activeTab",
-      "storage", 
-      "http://*/" 
+      "storage",
+      "declarativeNetRequest"  
     ],
     "action": {
       "default_popup": "popup.html"

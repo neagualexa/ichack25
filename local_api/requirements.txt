@@ -7,3 +7,4 @@ duckduckgo-search
 browser-use
 langsmith
 flask
+flask_cors
