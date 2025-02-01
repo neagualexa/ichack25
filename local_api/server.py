@@ -19,7 +19,7 @@ def run_agent():
     task = request.json.get('task_input') 
     check_only_main_page = request.json.get('toggle_task')
     
-    if check_only_main_page:
+    if not check_only_main_page:
         ai_task = 'Open the page: '+ page + ' .com. Accept all cookies. Return the url in a json format. Such as {"url": "https://example.com/test"}'
     else:
         ai_task = 'Open the page: '+ page + ' .com and Search for ' + task + \

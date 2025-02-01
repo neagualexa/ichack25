@@ -20,16 +20,15 @@ const addTask = () => {
     })
     .then(response => {
       if (response.ok) {
+        document.getElementById('announcementText').textContent = 'Task added successfully!';
+        document.getElementById('page_input').value = '';
+        document.getElementById('task_input').value = '';
         return response.json(); // Convert response to JSON if successful
       } else {
         throw new Error('Failed to add task.');
       }
     })
     .then(data => {
-      document.getElementById('announcementText').textContent = 'Task added successfully!';
-      document.getElementById('page_input').value = '';
-      document.getElementById('task_input').value = '';
-
       // Open the URL if it's provided in the response
       console.log('Extension data received::', data);
       if (data.url) {
@@ -47,7 +46,8 @@ const addTask = () => {
       addTaskBtn.innerHTML = 'AI Run';  // Reset button text to default
     });
   } else {
-    alert('Please complete both fields!');
+    document.getElementById('announcementText').textContent = 'Please complete the fields.';
+    document.getElementById('announcementText').style.color = 'orange';
   }
 };
 
@@ -69,7 +69,8 @@ if (prefersDarkMode) {
 document.getElementById('page_input').addEventListener('keypress', (event) => {
     if (event.key === 'Enter' && document.getElementById('toggle_task').checked) {
         // warning popup to complete the task too
-        alert('Please fill both fields!');
+      document.getElementById('announcementText').textContent = 'Please complete the fields.';
+      document.getElementById('announcementText').style.color = 'orange';
     }
     else if (event.key === 'Enter' && !document.getElementById('toggle_task').checked) {
       document.getElementById('addTaskBtn').click();
@@ -77,7 +78,10 @@ document.getElementById('page_input').addEventListener('keypress', (event) => {
 });
 
 document.getElementById('task_input').addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && document.getElementById('toggle_task').checked && document.getElementById('task_input').value === '') {
+      document.getElementById('announcementText').textContent = 'Please complete the fields.';
+      document.getElementById('announcementText').style.color = 'orange';
+    } else if (event.key === 'Enter') {
       document.getElementById('addTaskBtn').click();
     }
 });

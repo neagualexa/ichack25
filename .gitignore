@@ -1,3 +1,6 @@
 node_modules/
 
 */.env
+
+*/agent_history.gif
+terminal_output.txt
