@@ -1,0 +1,9 @@
+anthropic
+langchain
+langchain_community
+langchain-anthropic
+requests 
+duckduckgo-search
+browser-use
+langsmith
+flask

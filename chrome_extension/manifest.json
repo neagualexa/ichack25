@@ -1,0 +1,14 @@
+{
+    "manifest_version": 3,
+    "name": "My Task Manager",
+    "version": "1.0",
+    "description": "An AI task manager extension to automate your daily tasks.",
+    "permissions": [
+      "activeTab",
+      "storage", 
+      "http://*/" 
+    ],
+    "action": {
+      "default_popup": "popup.html"
+    }
+  }
