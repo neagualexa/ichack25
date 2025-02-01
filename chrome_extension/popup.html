@@ -1,4 +1,158 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Task Manager</title>
+  <style>
+    /* Global styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 10px;
+      transition: background-color 0.3s, color 0.3s;
+      width: 300px;
+    }
+
+    /* Light mode styles */
+    .light-mode {
+      background-color: #f4f7fc;
+      color: #333;
+    }
+
+    /* Dark mode styles */
+    .dark-mode {
+      background-color: #333;
+      color: #f4f7fc;
+    }
+
+    /* Container for form fields */
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+
+    /* Input fields styling */
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #task_input {
+        display: none;
+    }
+
+    /* Button styling */
+    button {
+      width: 85%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* Title styling */
+    h1 {
+      text-align: center;
+      color: inherit;
+    }
+
+    /* Dark mode button */
+    #darkModeBtn {
+      width: 85%;
+      padding: 10px;
+      margin-top: 20px;
+      background-color: #666;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    #darkModeBtn:hover {
+      background-color: #555;
+    }
+
+    /* Icon styling */
+    #darkModeBtn span {
+      font-size: 22px;
+      margin-left: 10px;
+    }
+
+    /* Spinner for loading state */
+    .spinner {
+      border: 4px solid transparent;
+      border-top: 4px solid #fff;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+    }
+
+    /* Spinner animation */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Disabled button styling when loading */
+    #addTaskBtn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+  </style>
+</head>
+<body class="light-mode">
+
+  <h1>Task Manager</h1>
+
+  <!-- Form container -->
+  <div class="form-container">
+    <input type="text" id="page_input" placeholder="Enter page URL" />
+
+    <label for="toggle_task">Specify searching task on the page</label>
+    <input type="checkbox" id="toggle_task" />
+    <input type="text" id="task_input" placeholder="Enter item" />
+
+    <button id="addTaskBtn">AI Run</button>
+
+    <div style="text-align: center;">
+      <text id="announcementText" style="color:#666;"></text>
+    </div>
+  
+    <!-- Dark Mode Toggle Button -->
+    <button id="darkModeBtn"><span id="modeIcon">🌞</span> </button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
 <html>
 <head>
   <title>My Task Manager</title>
@@ -9,4 +163,4 @@
 
   <script src="popup.js"></script>
 </body>
-</html>
+</html> -->
