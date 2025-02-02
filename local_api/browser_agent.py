@@ -8,7 +8,7 @@ load_dotenv()
 async def main():
     model = ChatAnthropic(model='claude-3-opus-20240229', api_key=os.environ.get("ANTHROPIC_API_KEY"))
     agent = Agent(
-        task='Go to imperial college.com. Return the url in a json format. Such as {"url": "https://example.com/test"}',
+        task='You can search and click on the filters on the pages. Go to nike.com and and help me look for the following: for women clothes from nike club collection of size M. Return the url of the site you end up at in a json format. Such as {"url": "https://example.com/test"}',
         llm=model,
     )
     result = await agent.run()

@@ -17,12 +17,9 @@ CORS(app)
 def run_agent():
     page = request.json.get('page_input') 
     task = request.json.get('task_input') 
-    check_only_main_page = request.json.get('toggle_task')
     
-    if not check_only_main_page:
-        ai_task = 'Open the page: '+ page + ' .com. Accept all cookies. Return the url in a json format. Such as {"url": "https://example.com/test"}'
-    else:
-        ai_task = 'Open the page: '+ page + ' .com and Search for ' + task + \
+    ai_task = 'You can search and click on the filters on the pages. '+ \
+            'Open the page: '+ page + ' .com and help me look for the following: ' + task + \
         '. Accept all cookies. Return the url in a json format. Such as {"url": "https://example.com/test"}'
     async def main():
         model = ChatAnthropic(model='claude-3-opus-20240229', api_key=os.environ.get("ANTHROPIC_API_KEY"))

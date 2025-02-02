@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Task Manager</title>
   <style>
+
+    /* Your existing styles */
+    /* Add a style for the close button */
+    #closeBtn {
+      width: 85%;
+      padding: 12px;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    #closeBtn:hover {
+      background-color: #e53935;
+    }
+  
     /* Global styles */
     body {
       font-family: Arial, sans-serif;
@@ -42,10 +62,6 @@
       border-radius: 5px;
       font-size: 16px;
       transition: background-color 0.3s, color 0.3s;
-    }
-
-    #task_input {
-        display: none;
     }
 
     /* Button styling */
@@ -121,19 +137,26 @@
       cursor: not-allowed;
     }
 
+    .wrap_nicely_text{
+      display: flex; 
+      justify-content: space-evenly;
+    }
+
   </style>
 </head>
 <body class="light-mode">
+  <button id="closeBtn" style="position: absolute; right: 10px; top: 0; width: fit-content; height: fit-content">x</button>
 
   <h1>Task Manager</h1>
 
   <!-- Form container -->
   <div class="form-container">
-    <input type="text" id="page_input" placeholder="Enter page URL" />
+     <!-- Close Button -->
+    <label for="page_input" class="wrap_nicely_text">Search for any site that you would need:</label>
+    <input type="text" id="page_input" placeholder="Enter page name" />
 
-    <label for="toggle_task" style="display: flex; justify-content: space-evenly">Specify searching task on the page: <input type="checkbox" id="toggle_task" /></label>
-    
-    <input type="text" id="task_input" placeholder="Enter item" />
+    <label for="task_input" class="wrap_nicely_text">Are you looking to do something specific?</label>
+    <input type="text" id="task_input" placeholder="Enter task to complete" />
 
     <button id="addTaskBtn">AI Run</button>
 
@@ -142,7 +165,7 @@
     </div>
   
     <!-- Dark Mode Toggle Button -->
-    <button id="darkModeBtn"><span id="modeIcon">🌞</span> </button>
+    <button id="darkModeBtn" style="width: fit-content; height: fit-content"><span id="modeIcon" style="display: flex; justify-content: center;">🌞</span> </button>
   </div>
 
   <script src="popup.js"></script>

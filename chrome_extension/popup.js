@@ -1,10 +1,15 @@
+// Handle button click to close the extension
+document.getElementById('closeBtn').addEventListener('click', () => {
+  window.close(); // Closes the popup when clicked
+});
+
+
 const addTask = () => {
   const page_input = document.getElementById('page_input').value;
   const task_input = document.getElementById('task_input').value;
   const addTaskBtn = document.getElementById('addTaskBtn');
-  const toggle_task = document.getElementById('toggle_task').checked;
 
-  if (task_input !== '' && page_input !== '' && toggle_task === true || page_input !== '' && toggle_task === false) {
+  if (task_input !== '' && page_input !== '') {
     // Disable the button and show the spinner
     addTaskBtn.disabled = true;
     addTaskBtn.innerHTML = '<div class="spinner"></div>';  // Insert the spinner inside the button
@@ -16,7 +21,7 @@ const addTask = () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ page_input: page_input, task_input: task_input, toggle_task: toggle_task})
+      body: JSON.stringify({ page_input: page_input, task_input: task_input})
     })
     .then(response => {
       if (response.ok) {
@@ -30,9 +35,11 @@ const addTask = () => {
     })
     .then(data => {
       // Open the URL if it's provided in the response
-      console.log('Extension data received::', data);
-      if (data.url) {
-        chrome.tabs.create({ url: data.url });
+      // console.log('Extension data received::', data);
+      json_data = JSON.parse(data);
+      document.getElementById('announcementText').textContent = 'Extension data received::'+ json_data.url; ;
+      if (json_data.url) {
+        chrome.tabs.create({ url: json_data.url });
       }
     })
     .catch(error => {
@@ -51,8 +58,6 @@ const addTask = () => {
   }
 };
 
-// Random GPT Stuff
-
 // Check browser's default mode on load and set the theme accordingly
 const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -66,25 +71,18 @@ if (prefersDarkMode) {
 }
 
 // Handle Enter key press (submit when Enter is pressed)
-document.getElementById('page_input').addEventListener('keypress', (event) => {
-    if (event.key === 'Enter' && document.getElementById('toggle_task').checked) {
-        // warning popup to complete the task too
-      document.getElementById('announcementText').textContent = 'Please complete the fields.';
-      document.getElementById('announcementText').style.color = 'orange';
-    }
-    else if (event.key === 'Enter' && !document.getElementById('toggle_task').checked) {
-      document.getElementById('addTaskBtn').click();
-    }
-});
-
-document.getElementById('task_input').addEventListener('keypress', (event) => {
-    if (event.key === 'Enter' && document.getElementById('toggle_task').checked && document.getElementById('task_input').value === '') {
-      document.getElementById('announcementText').textContent = 'Please complete the fields.';
-      document.getElementById('announcementText').style.color = 'orange';
-    } else if (event.key === 'Enter') {
-      document.getElementById('addTaskBtn').click();
-    }
-});
+const checkInputComplete = (event) => {
+  if (event.key === 'Enter' && (document.getElementById('page_input').value === '' || document.getElementById('task_input').value === '')) {
+      // warning popup to complete the task too
+    document.getElementById('announcementText').textContent = 'Please complete the fields.';
+    document.getElementById('announcementText').style.color = 'orange';
+  }
+  else if (event.key === 'Enter') {
+    document.getElementById('addTaskBtn').click();
+  }
+}
+document.getElementById('page_input').addEventListener('keypress', (event) => checkInputComplete(event));
+document.getElementById('task_input').addEventListener('keypress', (event) => checkInputComplete(event));
 
 // Handle button click to add task
 document.getElementById('addTaskBtn').addEventListener('click', addTask);
@@ -104,15 +102,6 @@ document.getElementById('darkModeBtn').addEventListener('click', () => {
         body.classList.add('light-mode');
         modeIcon.textContent = '🌞';  // Switch to sun emoji for light mode
     }
-});
-
-document.getElementById('toggle_task').addEventListener('change', function() {
-  const taskInput = document.getElementById('task_input');
-  if (this.checked) {
-      taskInput.style.display = 'block';
-  } else {
-      taskInput.style.display = 'none';
-  }
 });
 
 // Handle task addition (works both by clicking the button or pressing Enter)
