@@ -149,14 +149,18 @@
 
   <h1>Task Manager</h1>
 
+  <div style="text-align: center; padding-bottom: 20px;">
+    <text>Here you can search for the same specifics onto multiple site with the help of AI! No need to for you to spend hours yourself.</text>
+  </div>
+
   <!-- Form container -->
   <div class="form-container">
      <!-- Close Button -->
-    <label for="page_input" class="wrap_nicely_text">Search for any site that you would need:</label>
-    <input type="text" id="page_input" placeholder="Enter page name" />
+    <label for="page_input" class="wrap_nicely_text">Brand/Webite(s) that you would want to search for:</label>
+    <input type="text" id="page_input" placeholder="Enter website/brand names" />
 
-    <label for="task_input" class="wrap_nicely_text">Are you looking to do something specific?</label>
-    <input type="text" id="task_input" placeholder="Enter task to complete" />
+    <label for="task_input" class="wrap_nicely_text">What are you for specifically?</label>
+    <input type="text" id="task_input" placeholder="Enter task to complete" rows=3 cols=50 wrap="soft"/>
 
     <button id="addTaskBtn">AI Run</button>
 
